@@ -66,3 +66,78 @@ This helps the agent identify:
   "summaries": [],
   "preferences": {}
 }
+
+```
+-----
+# 🔹3. Memory Update Rules
+After every tool call:
+
+If a new incident is created → add to incidents[]
+
+If a new HR case is created → add to hr_cases[]
+
+If a new CSM case is created → add to csm_cases[]
+
+If a GRC risk is logged → add to grc_risks[]
+
+If an alert is analyzed → save to alerts[]
+
+If GenAI writes summary → save to summaries[]
+
+-------
+# 🔹 4. How Memory Helps the Agent
+✓ ITOM → ITSM correlation
+
+If an alert says CPU is 95% and memory contains:
+
+"incidents": ["High CPU alert last night"]
+
+
+→ Agent can say: “This issue is recurring, should we create a Problem record?”
+
+✓ HRSD follow-up
+
+Memory:
+
+hr_cases: ["HR-CASE-00123"]
+
+
+User: “What happened to my laptop request?”
+→ Agent knows the case number and retrieves it.
+
+✓ CSM customer issue recurrence
+
+Memory of:
+
+csm_cases: ["Customer cannot access account"]
+
+
+→ Helps detect repeated issues.
+
+✓ GRC risk escalation
+
+If two DR tests failed recently → memory helps agent decide:
+→ “This requires a GRC Risk record.”
+
+✓ Better summaries
+
+Memory helps the GenAI agent combine information into executive summaries.
+
+---------
+# 🔹 5. Output Format for Memory Updates
+
+Each time a tool is executed:
+
+{
+  "memory_update": {
+    "incidents": [...],
+    "alerts": [...],
+    "summaries": [...]
+  }
+}
+
+
+This file defines how the Agent stores, updates, and uses memory to make multi-step intelligent decisions.
+
+
+---
