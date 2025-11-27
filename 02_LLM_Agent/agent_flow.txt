@@ -1,0 +1,102 @@
+STEP 1 — USER MESSAGE  
+User sends a message such as:
+"Create a P2 incident for the email outage."
+
+------------------------------------------------------------
+
+STEP 2 — DOMAIN LLM (Step 1: SNE-AI-1)  
+We send the message to SNE-AI-1 using:
+- system_prompt.txt  
+- examples.txt  
+- prompt_template.txt  
+
+SNE-AI-1 returns TWO outputs:
+1. Explanation (human readable)
+2. JSON (machine readable):
+
+{
+ "module": "ITSM",
+ "action": "Create Incident",
+ "fields": {
+   "short_description": "Email outage",
+   "priority": "P2",
+   "assignment_group": "Messaging Support"
+ },
+ "confidence": 0.92,
+ "next_steps": ["Notify on-call engineer"]
+}
+
+------------------------------------------------------------
+
+STEP 3 — LLM AGENT (Tool Selector)  
+We now feed the above JSON into the Agent Prompt  
+(02_LLM_Agent/agent_prompt.txt)
+
+The Agent LLM chooses a tool.
+
+Expected response:
+
+{
+ "tool_name": "create_incident",
+ "tool_arguments": {
+   "short_description": "Email outage",
+   "priority": "P2",
+   "assignment_group": "Messaging Support"
+ },
+ "user_friendly_message": "Creating a P2 incident for the email outage."
+}
+
+------------------------------------------------------------
+
+STEP 4 — ORCHESTRATION ENGINE  
+Python (or Node, or any backend) reads:
+- tool_name
+- tool_arguments
+
+If tool_name = "create_incident":
+→ Call function create_incident(tool_arguments)
+
+------------------------------------------------------------
+
+STEP 5 — SERVICENOW TOOL LAYER  
+The tool calls ServiceNow via REST API:
+
+POST /api/now/table/incident
+
+Body:
+{
+  "short_description": "...",
+  "priority": "P2",
+  "assignment_group": "Messaging Support"
+}
+
+ServiceNow returns:
+{
+  "result": {
+    "number": "INC0012345",
+    "sys_id": "abc123"
+  }
+}
+
+------------------------------------------------------------
+
+STEP 6 — RETURN TO USER  
+The Agent sends a final message:
+
+"Incident INC0012345 has been created successfully.
+Priority: P2  
+Assigned to: Messaging Support."
+
+------------------------------------------------------------
+
+OPTIONAL STEP 7 — MEMORY (Agentic AI)  
+The Agent stores interaction context for future tasks:
+- user intent
+- created ticket numbers
+- affected CI
+
+This is used in Step 4 (Agentic AI) to enable planning and multi-step reasoning.
+
+------------------------------------------------------------
+
+END OF FLOW
