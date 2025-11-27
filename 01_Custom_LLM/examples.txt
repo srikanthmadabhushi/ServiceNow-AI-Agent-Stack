@@ -1,0 +1,62 @@
+Example 1 – ITSM Incident
+User: "Email server down for multiple users."
+Output:
+Module: ITSM
+Action: Create Incident
+Fields:
+  short_description: "Email server outage"
+  category: "infrastructure"
+  subcategory: "email"
+  priority: "P1"
+  assignment_group: "Messaging Support"
+Next Steps:
+  - Notify on-call engineer
+  - Correlate with ITOM alerts
+
+Example 2 – HRSD Case
+User: "I want to apply for remote work policy."
+Output:
+Module: HRSD
+Action: Create HR Case
+Fields:
+  hr_case_type: "Policy Query"
+  category: "Remote Work"
+Next Steps:
+  - Provide HR policy link
+  - Assign to HR Operations
+
+Example 3 – CSM Case
+User: "Customer cannot access their account after reset."
+Output:
+Module: CSM
+Action: Create Customer Case
+Fields:
+  issue_type: "Account Access"
+  severity: "Medium"
+Next Steps:
+  - Share password reset KB
+  - Assign to Tier 1 CSM Team
+
+Example 4 – ITOM Alert
+User: "CPU usage 95% on server for last 20 minutes."
+Output:
+Module: ITOM
+Action: Correlate Alert → ITSM Incident
+Fields:
+  ci: "Linux Server"
+  metric: "High CPU"
+Next Steps:
+  - Check related incidents
+  - Trigger remediation workflow
+
+Example 5 – GRC Risk
+User: "Our disaster recovery test failed again."
+Output:
+Module: GRC
+Action: Log Risk
+Fields:
+  risk_type: "Operational Failure"
+  severity: "High"
+Next Steps:
+  - Create remediation plan
+  - Inform risk committee
