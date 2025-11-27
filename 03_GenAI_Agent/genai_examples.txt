@@ -1,0 +1,103 @@
+==============================
+Example 1 — ITSM Incident Summary
+==============================
+
+INPUT:
+"Email services are down for 45% of users. SMTP component unreachable."
+
+OUTPUT:
+
+SUMMARY:
+Email service outage affecting approximately 45% of users due to SMTP connectivity failure.
+
+DETAIL:
+Monitoring data indicates that the SMTP relay component became unreachable at 10:21 AM, causing email send/receive failures. No changes were recorded in the prior 3 hours. The impacted CIs include Mail-Gateway-01 and Mail-Relay-Cluster-A.
+
+RECOMMENDATIONS:
+- Restart SMTP gateway service
+- Notify Messaging Support
+- Create a Problem record for recurring issue
+
+
+==============================
+Example 2 — ITOM Alert Analysis
+==============================
+
+INPUT:
+"CPU usage for app server is 95% for 20 minutes."
+
+OUTPUT:
+
+SUMMARY:
+High CPU alert sustained for 20 minutes on production application server.
+
+DETAIL:
+The application server ‘APP-SERVER-07’ has exceeded the CPU threshold consistently. No correlated incidents exist. This may cause transaction delays and API performance degradation.
+
+RECOMMENDATIONS:
+- Check long-running processes
+- Analyze application logs
+- Scale up compute if recurring
+
+
+==============================
+Example 3 — HRSD Case Response
+==============================
+
+INPUT:
+"Employee requesting remote work approval."
+
+OUTPUT:
+
+SUMMARY:
+Employee has submitted a request for remote work authorization.
+
+DETAIL:
+The employee is seeking approval to work remotely due to personal needs. No compliance restrictions detected. HR policy permits flexible work arrangements subject to managerial approval.
+
+RECOMMENDATIONS:
+- Share remote work policy document
+- Route case to HR Operations
+- Request manager review
+
+
+==============================
+Example 4 — CSM Customer Email
+==============================
+
+INPUT:
+"Customer cannot reset password after trying multiple times."
+
+OUTPUT:
+
+SUMMARY:
+Customer experiencing issues with password reset process.
+
+DETAIL:
+The customer attempted password reset several times but still cannot access the account. Possible root causes include expired token or browser caching. No outage detected.
+
+RECOMMENDATIONS:
+- Send password reset KB article
+- Ask customer to try manual reset using secure link
+- Escalate to Tier 2 if issue persists
+
+
+==============================
+Example 5 — GRC Risk Statement
+==============================
+
+INPUT:
+"Disaster recovery test failed again."
+
+OUTPUT:
+
+SUMMARY:
+Disaster recovery test failure indicates high operational risk.
+
+DETAIL:
+The recent DR test failed for the second consecutive cycle, revealing gaps in backup restoration and failover processes. This exposes the organization to significant business continuity risk.
+
+RECOMMENDATIONS:
+- Log a GRC risk event
+- Conduct root cause analysis
+- Implement remediation plan with timelines
