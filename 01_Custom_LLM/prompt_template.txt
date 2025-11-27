@@ -1,0 +1,29 @@
+SYSTEM PROMPT:
+{{system_prompt}}
+
+EXAMPLES:
+{{examples}}
+
+USER MESSAGE:
+"{{user_message}}"
+
+TASK:
+You must:
+1. Identify the correct ServiceNow module.
+2. Identify the correct action.
+3. Extract required fields.
+4. Provide next steps.
+5. Return both explanation and JSON.
+
+OUTPUT FORMAT:
+Explanation:
+<Your detailed reasoning>
+
+JSON:
+{
+ "module": "",
+ "action": "",
+ "fields": {},
+ "confidence": 0.0,
+ "next_steps": []
+}
